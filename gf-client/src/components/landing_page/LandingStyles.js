@@ -18,11 +18,11 @@ const landingStyles = makeStyles(theme => ({
         borderTop: ".3rem solid #333",
         borderLeft: ".3rem solid #333",
         borderRight: ".3rem solid #333",
-        backgroundColor: "#555",
+        backgroundColor: "#777",
         marginBottom: "-.3rem",
         zIndex: "10",
         "&.active": {
-            background: "#111",
+            background: "#555",
         },
     },
     window: {
@@ -38,26 +38,54 @@ const landingStyles = makeStyles(theme => ({
     login: {
         display: "flex",
         flexDirection: "column",
+        marginBottom: "15%",
+        alignItems: "center",
+        height: "40%",
     },
     textField: {
         "& label.Mui-focused": {
             color: "#fff",
+        },
+        "& label": {
+            color: "#ccc"
         },
         "& .MuiInput-underline:after": {
             borderBottomColor: "#fff",
         },
         "& .MuiOutlinedInput-root": {
             "& fieldset": {
-                borderColor: "#999",
+                border: "3px solid #999",
+                borderRadius: "0",
             },
             "&:hover fieldset": {
-                borderColor: "#bbb",
+                border: "3px solid #bbb",
+                borderRadius: "0",
             },
             "&.Mui-focused fieldset": {
-                borderColor: "#fff",
+                border: "3px solid #fff",
+                borderRadius: "0",
             },
         },
     },
+    input: {
+        color: "white",
+    },
+    button: {
+        display: "flex",
+        padding: ".5rem 1rem",
+        background: "#777",
+        border: ".2rem solid #999",
+        color: "#fff",
+        // marginTop: "3rem",
+        "&:active": {
+            border: ".1rem solid #888",
+            marginTop: ".2rem",
+            marginBottom: "-.1rem",
+        }
+    },
+    buttonWrapper: {
+        display: "flex",
+    }
 }));
 
 export default landingStyles;
