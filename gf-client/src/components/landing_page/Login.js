@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import landingStyles from "./LandingStyles";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Typography } from "@material-ui/core/";
+import axios from "axios";
 
 const Login = () => {
     const classes = landingStyles();
@@ -18,28 +19,49 @@ const Login = () => {
         });
     };
 
+    const handleSubmit = e => {
+        axios
+            .post("https://gnarly-funky.herokuapp.com/api/login/", values)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     return (
         <div className={classes.login}>
+            WELCOME BACK!
             <TextField
                 id="outlined-name"
-                label="username"
+                label="USERNAME"
                 name="username"
                 className={classes.textField}
                 value={values.username}
                 onChange={handleChange}
                 margin="normal"
                 variant="outlined"
+                inputProps={{
+                    className: classes.input
+                }}
             />
             <TextField
                 id="outlined-name"
-                label="password"
+                label="PASSWORD"
                 name="password"
                 className={classes.textField}
                 value={values.password}
                 onChange={handleChange}
                 margin="normal"
                 variant="outlined"
+                inputProps={{
+                    className: classes.input
+                }}
             />
+            <div className={classes.buttonWrapper}>
+                <Typography className={classes.button} onClick={handleSubmit}>LOGIN</Typography>
+            </div>
         </div>
     );
 };
