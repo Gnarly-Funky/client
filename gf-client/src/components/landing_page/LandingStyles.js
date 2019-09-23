@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 const landingStyles = makeStyles(theme => ({
     root: {
+        ...theme.typography,
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
