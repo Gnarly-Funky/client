@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import landingStyles from "./LandingStyles";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Typography } from "@material-ui/core/";
 import axios from "axios";
 
 const Login = () => {
@@ -60,7 +60,7 @@ const Login = () => {
                 }}
             />
             <div className={classes.buttonWrapper}>
-                <button className={classes.button} onClick={handleSubmit}>Login</button>
+                <Typography className={classes.button} onClick={handleSubmit}>LOGIN</Typography>
             </div>
         </div>
     );

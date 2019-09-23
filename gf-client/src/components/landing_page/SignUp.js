@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import landingStyles from "./LandingStyles";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Typography } from "@material-ui/core/";
 import axios from "axios";
 
 const SignUp = () => {
@@ -12,9 +12,7 @@ const SignUp = () => {
         password2: "",
     });
 
-    const [error, setError] = useState({
-
-    })
+    const [error, setError] = useState({});
 
     const handleChange = e => {
         e.preventDefault();
@@ -35,17 +33,16 @@ const SignUp = () => {
             })
             .catch(err => {
                 setError({
-                    ...err.response.data
-                })
+                    ...err.response.data,
+                });
             });
+        console.log(error)
     };
 
     return (
         <div className={classes.login}>
             Bruh
-            {Object.values(error).map((err) => {
-                return err
-            })}
+            <div className={classes.errorDescription}>{error["username"]}</div>
             <TextField
                 id="outlined-name"
                 label="USERNAME"
@@ -59,12 +56,13 @@ const SignUp = () => {
                     className: classes.input,
                 }}
             />
+            <div className={classes.errorDescription}>{error["password1"]}</div>
             <TextField
                 id="outlined-name"
                 label="PASSWORD"
-                name="password"
+                name="password1"
                 className={classes.textField}
-                value={values.password}
+                value={values.password1}
                 onChange={handleChange}
                 margin="normal"
                 variant="outlined"
@@ -72,6 +70,7 @@ const SignUp = () => {
                     className: classes.input,
                 }}
             />
+            <div className={classes.errorDescription}>{error["password2"]} {error["non_field_errors"]}</div>
             <TextField
                 id="outlined-name"
                 label="RE-ENTER PASSWORD"
@@ -85,9 +84,9 @@ const SignUp = () => {
                     className: classes.input,
                 }}
             />
-            <button className={classes.button} onClick={handleSubmit}>
+            <Typography className={classes.button} onClick={handleSubmit}>
                 Sign Up!
-            </button>
+            </Typography>
         </div>
     );
 };
