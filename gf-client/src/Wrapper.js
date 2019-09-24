@@ -1,6 +1,8 @@
 import React from 'react'
 import LandingPage from './components/landing_page/LandingPage'
 import { makeStyles } from "@material-ui/core";
+import { Route } from 'react-router-dom';
+import Game from './components/game/Game';
 
 const Wrapper = () => {
     const classes = makeStyles({
@@ -8,7 +10,7 @@ const Wrapper = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "#777",
+            backgroundColor: "#202020",
             width: "100%",
             height: "100vh",
             color: "white",
@@ -17,7 +19,8 @@ const Wrapper = () => {
 
     return (
         <div className={classes.root}>
-            <LandingPage />
+            <Route exact path="/" component={LandingPage}/>
+            <Route exact path="/game" component={Game} />
         </div>
     )
 }
