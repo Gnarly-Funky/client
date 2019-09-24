@@ -8,22 +8,30 @@ const landingStyles = makeStyles(theme => ({
         flexDirection: "column",
         width: "60%",
         height: "80%",
+        border: ".3rem solid #4a4a4a",
+        background: "#4a4a4a",
     },
     tabs: {
         display: "flex",
-        justifyContent: "space-between",
+        alignItems: "center",
+        justifyContent: "flex-end",
         width: "100%",
+        borderTop: ".3rem solid #202020",
+        borderLeft: ".3rem solid #202020",
+        borderRight: ".3rem solid #202020",
     },
     tab: {
         padding: "1rem 1.5rem",
-        borderTop: ".8rem solid #333",
-        borderLeft: ".8rem solid #333",
-        borderRight: ".8rem solid #333",
-        backgroundColor: "#777",
-        marginBottom: "-.8rem",
+        borderLeft: ".3rem solid #202020",
+        backgroundColor: "#4a4a4a",
         zIndex: "10",
+        height: "100%",
+        display: "flex",
+        color: "#202020",
+        userSelect: "none",
         "&.active": {
-            background: "#555",
+            background: "#c4c4c4",
+            color: "#202020"
         },
     },
     window: {
@@ -33,60 +41,65 @@ const landingStyles = makeStyles(theme => ({
         // justifyContent: "center",
         width: "100%",
         height: "100%",
-        backgroundColor: "#555",
-        border: ".8rem solid #333",
+        backgroundColor: "#4a4a4a",
+        border: ".3rem solid #202020",
     },
     login: {
         display: "flex",
         flexDirection: "column",
-        marginTop: "10%",
+        marginTop: "6%",
         alignItems: "center",
         height: "40%",
+        color: "#c4c4c4",
     },
     textField: {
         "& label.Mui-focused": {
-            color: "#fff",
+            color: "#c4c4c4",
         },
         "& label": {
-            color: "#ccc",
+            color: "#c4c4c4",
         },
         "& .MuiInput-underline:after": {
-            borderBottomColor: "#fff",
+            borderBottomColor: "#c4c4c4",
         },
         "& .MuiOutlinedInput-root": {
             "& fieldset": {
-                border: ".3rem solid #999",
+                border: ".3rem solid #c4c4c4",
                 borderRadius: "0",
             },
             "&:hover fieldset": {
-                border: ".3rem solid #bbb",
+                border: ".3rem solid #c4c4c4",
                 borderRadius: "0",
             },
             "&.Mui-focused fieldset": {
-                border: ".3rem solid #fff",
+                border: ".3rem solid #c4c4c4",
                 borderRadius: "0",
             },
         },
     },
     input: {
-        color: "white",
+        color: "#c4c4c4",
         fontFamily: "sans-serif",
     },
     button: {
         display: "flex",
-        padding: "1rem 1.5rem",
-        background: "#777",
-        border: ".6rem solid #999",
-        color: "#fff",
-        // marginTop: "3rem",
+        padding: ".3rem 3rem",
+        background: "#c4c4c4",
+        border: ".3rem solid #202020",
+        color: "#202020",
+        marginTop: "2rem",
+        userSelect: "none",
+        fontSize: "2.6rem",
         "&:active": {
-            border: ".4rem solid #888",
-            marginTop: ".4rem",
-            marginBottom: "-.3rem",
+            color: "white",
+            border: ".3rem solid #202020",
+            background: "#4a4a4a",
         },
     },
     buttonWrapper: {
         display: "flex",
+        justifyContent: "center",
+        width: "100%",
     },
     error: {
         color: "red",
@@ -101,12 +114,28 @@ const landingStyles = makeStyles(theme => ({
         color: "red",
         fontSize: "1.6rem",
         fontFamily: "sans-serif",
+        fontWeight: "bold",
         textTransform: "uppercase",
         textAlign: "center",
         marginTop: "1rem",
     },
     errorContainer: {
         margin: ".5rem",
+    },
+    header: {
+        fontSize: "5rem",
+    },
+    signout: {
+        display: "flex",
+        height: '3rem',
+        width: '3.5rem',
+        '& svg': {
+            display: "flex",
+            height: "100%",
+        },
+        '& svg g': {
+            fill: "#c4c4c4",
+        }
     }
 }));
 

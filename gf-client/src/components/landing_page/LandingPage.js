@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import landingStyles from "./LandingStyles";
+import Signout from "../../assets/Signout";
 
-const LandingPage = () => {
+const LandingPage = (props) => {
     // Styling
     const classes = landingStyles();
 
@@ -42,9 +43,12 @@ const LandingPage = () => {
                 >
                     Sign Up
                 </div>
+                {/* <div className={classes.tab}>
+                    <div className={classes.signout}><Signout/></div>
+                </div> */}
             </div>
             <div className={classes.window}>
-                {currentTab === "login" ? <Login /> : <SignUp />}
+                {currentTab === "login" ? <Login {...props} /> : <SignUp {...props} />}
             </div>
         </div>
     );
