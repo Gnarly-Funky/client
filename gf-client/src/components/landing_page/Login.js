@@ -11,6 +11,10 @@ const Login = () => {
         password: "",
     });
 
+    const [error, setError] = useState({
+
+    })
+
     const handleChange = e => {
         e.preventDefault();
         setValues({
@@ -26,13 +30,16 @@ const Login = () => {
                 console.log(res)
             })
             .catch(err => {
-                console.log(err)
+                setError({
+                    ...err.response.data
+                })
             })
     }
 
     return (
         <div className={classes.login}>
             WELCOME BACK!
+            <div className={classes.errorDescription}>{error["non_field_errors"]}</div>
             <TextField
                 id="outlined-name"
                 label="USERNAME"
@@ -46,6 +53,7 @@ const Login = () => {
                     className: classes.input
                 }}
             />
+            <div className={classes.errorDescription}>{error["password"]}</div>
             <TextField
                 id="outlined-name"
                 label="PASSWORD"
