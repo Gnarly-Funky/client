@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import gameStyles from "./GameStyles";
 import Signout from "../../assets/Signout";
 import Chat from "./Chat";
+import WorldMap from "./WorldMap"
 
 const Game = props => {
     const classes = gameStyles();
@@ -35,7 +36,8 @@ const Game = props => {
                 </div>
             </div>
             <div className={classes.main}>
-                <div className={classes.window}></div>
+                <div className={classes.window}><WorldMap/></div>
+                
                 <div className={classes.sidebar}>
                     <div className={classes.top}></div>
                     <div className={classes.bottom}>
