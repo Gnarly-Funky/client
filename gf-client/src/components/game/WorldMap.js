@@ -1,53 +1,65 @@
-import React, { useState }from 'react'
-import Tile from "./Tile"
-
-
-
-
-
+import React, { useState, useEffect } from "react";
+import Tile from "./Tile";
+import { makeStyles } from "@material-ui/core";
 
 const WorldMap = ({ columns = 9, player, worldArray }) => {
-  console.log(worldArray)
-    let x0 = player.x - 4
-    let y0 = player.y - 4
-  let display = []
-  console.log("reading worldArray")
-    for (let row = y0; row < y0 + columns; row++) {
-      for (let col = x0; col < x0 + columns; col++) {
-        if (worldArray[col][row] == null) {
-          display.push('blank')
-        } else {
-          let tilename = ""
-          if (worldArray[col][row].north == true) {
-            tilename.concat("N")
-          }
-          if (worldArray[col][row].south == true) {
-            tilename.concat("S")
-          }
-          if (worldArray[col][row].east == true) {
-            tilename.concat("E")
-          }
-          if (worldArray[col][row].west == true) {
-            tilename.concat("W")
-          }
 
-          console.log(tilename)
-          display.push(tilename)
-          tilename = ''
-          
+    const classes = makeStyles(theme => ({
+        worldMap: {
+            display: "flex",
+            flexWrap: "wrap",
         }
-      }
-    }
-  
-  
-  
-    return (
-        <div className="world-map">
-        {display.map((tile, index) => <Tile className="world-map-tile" icon={tile[index]} />)}
-          
-        </div>
-    )
-  } 
-      
+    }))()
 
-export default WorldMap
+    const [displayArr, setDisplayArr] = useState([]);
+
+    useEffect(() => {
+        if (worldArray[0]) {
+            // console.log(worldArray);
+            let currentX = player.x - Math.floor(columns / 2);
+            let currentY = player.y - Math.floor(columns / 2);
+            // console.log(currentX, currentY)
+            let newArr = []
+            for (let y = 0; y < columns; y++) {
+                for (let x = 0; x < columns; x++) {
+                    if (worldArray[currentX][currentY] === null) {
+                        newArr = [...newArr, "null"]
+                    } else {
+                        let tilename = "";
+                        if (worldArray[currentX][currentY].north === true) {
+                            tilename += "N";
+                        }
+                        if (worldArray[currentX][currentY].south === true) {
+                            console.log("hey")
+                            tilename += "S";
+                        }
+                        if (worldArray[currentX][currentY].east === true) {
+                            tilename += "E";
+                        }
+                        if (worldArray[currentX][currentY].west === true) {
+                            tilename += "W";
+                        }
+                        newArr = [...newArr, tilename]
+                    }
+                    currentX++
+                }
+                // console.log(currentY)
+                currentX = player.x - Math.floor(columns / 2)
+                currentY++
+            }
+            // console.log(newArr)
+            setDisplayArr([...newArr, "asdf"])
+        }
+        // console.log(displayArr)
+    }, [worldArray]);
+
+    return (
+        <div className={classes.worldMap}>
+            {displayArr.map(tile => (
+                <Tile className="world-map-tile" icon={tile} />
+            ))}
+        </div>
+    );
+};
+
+export default WorldMap;
