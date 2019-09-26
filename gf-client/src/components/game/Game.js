@@ -9,8 +9,8 @@ const Game = props => {
     const [worldArray, setWorldArray] = useState();
     const [worldSize, setWorldSize] = useState(0);
     let player = {
-        x: 20,
-        y: 20,
+        x: 40,
+        y: 40,
     };
 
     useEffect(() => {

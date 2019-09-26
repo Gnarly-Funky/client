@@ -1,17 +1,19 @@
 import React from "react";
-import All from "../../assets/Main/js/All";
-import East from "../../assets/Main/js/East";
-import ESW from "../../assets/Main/js/ESW";
+import E from "../../assets/Main/js/E";
+import EW from "../../assets/Main/js/EW";
+import N from "../../assets/Main/js/N";
 import NE from "../../assets/Main/js/NE";
-import NES from "../../assets/Main/js/NES";
-import North from "../../assets/Main/js/North";
+import NEW from "../../assets/Main/js/NEW";
+import NS from "../../assets/Main/js/NS";
+import NSE from "../../assets/Main/js/NSE";
+import NSEW from "../../assets/Main/js/NSEW";
+import NSW from "../../assets/Main/js/NSW";
 import NW from "../../assets/Main/js/NW";
+import S from "../../assets/Main/js/S";
 import SE from "../../assets/Main/js/SE";
-import South from "../../assets/Main/js/South";
+import SEW from "../../assets/Main/js/SEW";
 import SW from "../../assets/Main/js/SW";
-import SWN from "../../assets/Main/js/SWN";
-import West from "../../assets/Main/js/West";
-import WNE from "../../assets/Main/js/WNE";
+import W from "../../assets/Main/js/W";
 import { makeStyles } from "@material-ui/styles";
 
 const Tile = props => {
@@ -24,7 +26,15 @@ const Tile = props => {
             background: "black",
             "& svg": {
                 fill: "gray",
-                zIndex: "1000",
+            },
+        },
+        emptyTile: {
+            display: "flex",
+            width: "11%",
+            margin: "0",
+            background: "black",
+            "& svg": {
+                fill: "rgba(0,0,0,0)",
             },
         },
     }))();
@@ -34,31 +44,31 @@ const Tile = props => {
         case "NSEW":
             return (
                 <div className={classes.tile}>
-                    <All />
+                    <NSEW />
                 </div>
             );
         case "NSE":
             return (
                 <div className={classes.tile}>
-                    <NES />
+                    <NSE />
                 </div>
             );
         case "NSW":
             return (
                 <div className={classes.tile}>
-                    <SWN />
+                    <NSW />
                 </div>
             );
         case "NEW":
             return (
                 <div className={classes.tile}>
-                    <WNE />
+                    <NEW />
                 </div>
             );
         case "SEW":
             return (
                 <div className={classes.tile}>
-                    <ESW />
+                    <SEW />
                 </div>
             );
         case "NE":
@@ -85,32 +95,48 @@ const Tile = props => {
                     <SW />
                 </div>
             );
+        case "EW":
+            return (
+                <div className={classes.tile}>
+                    <EW />
+                </div>
+            );
+        case "NS":
+            return (
+                <div className={classes.tile}>
+                    <NS />
+                </div>
+            );
         case "N":
             return (
                 <div className={classes.tile}>
-                    <North />
+                    <N />
                 </div>
             );
         case "S":
             return (
                 <div className={classes.tile}>
-                    <South />
+                    <S />
                 </div>
             );
         case "E":
             return (
                 <div className={classes.tile}>
-                    <East />
+                    <E />
                 </div>
             );
         case "W":
             return (
                 <div className={classes.tile}>
-                    <West />
+                    <W />
                 </div>
             );
         default:
-            return <div className={classes.tile} />;
+            return (
+                <div className={classes.emptyTile}>
+                    <E />
+                </div>
+            );
     }
 };
 

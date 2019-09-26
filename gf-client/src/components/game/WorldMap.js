@@ -22,7 +22,9 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
             let newArr = []
             for (let y = 0; y < columns; y++) {
                 for (let x = 0; x < columns; x++) {
-                    if (worldArray[currentX][currentY] === null) {
+                    if (currentX > 40 || currentY > 40) {
+                        newArr=[...newArr, "null"]
+                    } else if (worldArray[currentX][currentY] === null) {
                         newArr = [...newArr, "null"]
                     } else {
                         let tilename = "";
@@ -48,10 +50,13 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
                 currentY++
             }
             // console.log(newArr)
-            setDisplayArr([...newArr, "asdf"])
+            setDisplayArr([...newArr])
         }
-        // console.log(displayArr)
     }, [worldArray]);
+
+    useEffect(() => {
+        console.log(displayArr)
+    }, [displayArr])
 
     return (
         <div className={classes.worldMap}>
