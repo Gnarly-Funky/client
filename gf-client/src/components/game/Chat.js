@@ -23,7 +23,8 @@ const Chat = props => {
         const channel = pusher.subscribe("a_channel");
 
         channel.bind("an_event", data => {
-            addMessage(data.message);
+            const newMessage = `${data.name}: ${data.message}`
+            addMessage(newMessage);
             channel.unbind_all();
         });
     }, [messages]);
@@ -34,11 +35,13 @@ const Chat = props => {
         e.preventDefault();
         const headthing = `Token ${localStorage.getItem("token")}`;
         axios
+            // .post("https://gnarly-funky.herokuapp.com/ajax/chat/", {
             .post("http://127.0.0.1:8000/ajax/chat/", {
                 headers: {
-                    authorization: headthing,
+                    authorization: headthing
                 },
                 message: message,
+                username: props.serverPlayer.player_name
             })
             .then(() => {})
             .catch(err => {

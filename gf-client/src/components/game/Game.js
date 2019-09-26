@@ -108,22 +108,6 @@ const Game = props => {
             });
     }, []);
 
-    // useEffect(() => {
-    //     //Get Initial player information
-    //     const headthing = `Token ${localStorage.getItem('token')}`;
-
-    //     axios
-    //         .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
-    //         .then(response => {
-    //             console.log(response.data)
-    //             setServerPlayer(response.data)
-    //             setPlayer({x:response.data.room_x,y:response.data.room_y})
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    // }, []);
-
     useEffect(() => {
         const headthing = `Token ${localStorage.getItem('token')}`;
         axios
@@ -136,19 +120,6 @@ const Game = props => {
             .catch(error => {
                 console.log(error);
             });
-        let interval = setInterval(() => {
-            //Get Initial player information
-            axios
-                .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
-                .then(response => {
-                    console.log(response.data)
-                    setServerPlayer(response.data)
-                    setPlayer({ x: response.data.room_x, y: response.data.room_y })
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }, 5000)
     }, []);
 
     const classes = gameStyles();
@@ -211,7 +182,6 @@ const Game = props => {
             .catch(error => {
                 console.log(error);
             });
-
     }
 
     const [open, setOpen] = useState(false);
@@ -308,7 +278,7 @@ const Game = props => {
                                 Inventory
                             </div>
                         </div>
-                        {currentTab === "chat" ? <Chat setFocus={setFocus} /> : <Inventory />}
+                        {currentTab === "chat" ? <Chat setFocus={setFocus} serverPlayer={serverPlayer}/> : <Inventory />}
                     </div>
                 </div>
             </div>
