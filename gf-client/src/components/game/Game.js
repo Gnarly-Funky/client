@@ -5,6 +5,7 @@ import Signout from "../../assets/Signout";
 import Chat from "./Chat";
 import WorldMap from "./WorldMap";
 import axios from "axios";
+import Minimap from "./Minimap";
 
 
 const KeyHandle = (key, e) => {
@@ -133,7 +134,13 @@ const Game = props => {
                 )}
 
                 <div className={classes.sidebar}>
-                    <div className={classes.top}></div>
+                    <div className={classes.top}>
+                        {worldArray ? (
+                            <Minimap worldArray={worldArray} player={player} />
+                        ) : (
+                            <p>LOADING...</p>
+                        )}
+                    </div>
                     <div className={classes.bottom}>
                         <div className={classes.tabs}>
                             <div

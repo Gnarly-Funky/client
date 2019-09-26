@@ -1,6 +1,6 @@
 import React from "react";
 
-const East = () => {
+const E = () => {
     return (
         <svg
             width="100%"
@@ -9,10 +9,10 @@ const East = () => {
             version="1.1"
         >
             <g transform="matrix(-1,9.95799e-17,-9.95799e-17,-1,16,16)">
-                <path d="M1,6L1,2L2,2L2,1L14,1L14,2L15,2L15,14L14,14L14,15L1,15L1,10L0,10L0,16L16,16L16,0L0,0L0,6L1,6Z" />
+                <path d="M0,6L1,6L1,2L2,2L2,1L14,1L14,2L15,2L15,14L14,14L14,15L2,15L2,14L1,14L1,10L0,10L0,16L16,16L16,0L0,0L0,6Z" />
             </g>
         </svg>
     );
 };
 
-export default East;
+export default E;

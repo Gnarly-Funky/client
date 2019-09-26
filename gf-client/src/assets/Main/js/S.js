@@ -1,6 +1,6 @@
 import React from "react";
 
-const SWN = () => {
+const S = () => {
     return (
         <svg
             width="100%"
@@ -9,12 +9,10 @@ const SWN = () => {
             version="1.1"
         >
             <g transform="matrix(-1.60812e-16,-1,1,-1.60812e-16,1.77636e-15,16)">
-                <path d="M2,2L2,1L6,1L6,0L0,0L0,6L1,6L1,2L2,2Z" />
+                <path d="M0,6L1,6L1,2L2,2L2,1L14,1L14,2L15,2L15,14L14,14L14,15L2,15L2,14L1,14L1,10L0,10L0,16L16,16L16,0L0,0L0,6Z" />
             </g>
-            <path d="M0,5L1,5L1,2L2,2L2,1L6,1L6,0L0,0L0,5Z" />
-            <path d="M10,1L10,0L16,0L16,16L10,16L10,15L14,15L14,14L15,14L15,2L14,2L14,1L10,1Z" />
         </svg>
     );
 };
 
-export default SWN;
+export default S;
