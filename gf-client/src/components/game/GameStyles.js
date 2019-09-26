@@ -116,6 +116,27 @@ const gameStyles = makeStyles(theme => ({
     },
     inventory: {
         fontSize: "2rem",
+    },
+    chat: {
+        display: "flex",
+        flexDirection: "column",
+        margin: "1rem",
+        width: "100%",
+    },
+    chatSection: {
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        wordBreak: "break-word",
+        hyphens: "auto",
+    },
+    message: {
+        // marginTop: "1rem",
+        display: "flex",
+        width: "100%",
+        maxWidth: "100%",
+        fontSize: "2rem",
+        lineHeight: "1rem",
     }
 }))
 
