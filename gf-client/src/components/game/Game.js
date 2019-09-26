@@ -46,56 +46,6 @@ function useKeyPress(targetKey) {
     return [keyPressed, setDisabled];
 }
 
-
-const KeyHandle = (key, e) => {
-    switch (key) {
-        case 'up':
-            HandleMove(key);
-            break;
-        case 'left':
-            HandleMove(key);
-            break;
-        case 'right':
-            HandleMove(key);
-            break;
-        case 'down':
-            HandleMove(key);
-            break;
-        default:
-            break;
-    }
-}
-
-const HandleMove = (dir) => {
-    switch (dir) {
-        case 'left':
-            console.log('move left');
-            break;
-        case 'right':
-            console.log('move right');
-            break;
-        case 'up':
-            console.log('move up');
-            break;
-        case 'down':
-            console.log('move down');
-            break;
-        default:
-            break;
-    }
-}
-
-const SendMove = (room) => {
-    axios
-        .post("https://gnarly-funky.herokuapp.com/api/adv/move/", `{"room_id": ${room}}`)
-        .then(response => {
-
-        })
-        .catch(error => {
-            console.log(error);
-        });
-}
-
 const Game = props => {
     const [focus, setFocus] = useState(false);
     const [worldArray, setWorldArray] = useState();
@@ -103,6 +53,16 @@ const Game = props => {
     const [player, setPlayer] = useState({
         x: 20,
         y: 20,
+    });
+    const [serverPlayer, setServerPlayer] = useState({
+        "player_uuid": "",
+        "room_uuid": "",
+        "player_id": 0,
+        "player_name": "",
+        "room_id": 0,
+        "room_title": "",
+        "room_description": "",
+        "other_players": [],
     });
 
     const [wPress, setWDisabled] = useKeyPress("w");
@@ -148,6 +108,49 @@ const Game = props => {
             });
     }, []);
 
+    // useEffect(() => {
+    //     //Get Initial player information
+    //     const headthing = `Token ${localStorage.getItem('token')}`;
+
+    //     axios
+    //         .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+    //         .then(response => {
+    //             console.log(response.data)
+    //             setServerPlayer(response.data)
+    //             setPlayer({x:response.data.room_x,y:response.data.room_y})
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // }, []);
+
+    useEffect(() => {
+        const headthing = `Token ${localStorage.getItem('token')}`;
+        axios
+            .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+            .then(response => {
+                console.log(response.data)
+                setServerPlayer(response.data)
+                setPlayer({ x: response.data.room_x, y: response.data.room_y })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        let interval = setInterval(() => {
+            //Get Initial player information
+            axios
+                .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+                .then(response => {
+                    console.log(response.data)
+                    setServerPlayer(response.data)
+                    setPlayer({ x: response.data.room_x, y: response.data.room_y })
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }, 5000)
+    }, []);
+
     const classes = gameStyles();
 
     const [currentTab, setCurrentTab] = useState("chat");
@@ -169,30 +172,47 @@ const Game = props => {
     };
 
     useEffect(() => {
+        // console.log(wPress);
         if (!focus) {
             if (wPress === true && worldArray[player.x][player.y].north) {
-                setPlayer({
-                    ...player,
-                    y: player.y - 1,
-                });
+                HandleMove(0, -1)
+                    ;
             } else if (aPress === true && worldArray[player.x][player.y].west) {
-                setPlayer({
-                    ...player,
-                    x: player.x - 1,
-                });
+                HandleMove(-1, 0)
+                    ;
             } else if (sPress === true && worldArray[player.x][player.y].south) {
-                setPlayer({
-                    ...player,
-                    y: player.y + 1,
-                });
+                HandleMove(0, 1)
+                    ;
             } else if (dPress === true && worldArray[player.x][player.y].east) {
-                setPlayer({
-                    ...player,
-                    x: player.x + 1,
-                });
+                HandleMove(1, 0)
+                    ;
             }
         }
     }, [wPress, aPress, sPress, dPress]);
+
+    const HandleMove = (dx, dy) => {
+        let newRoomCoords = { x: player.x + dx, y: player.y + dy }
+        setPlayer({
+            ...player,
+            x: player.x + dx,
+            y: player.y + dy
+        })
+        //find the room ID of the room we are moving to.
+        let newId = worldArray[newRoomCoords.x][newRoomCoords.y].id
+        console.log(newId)
+
+        const headthing = `Token ${localStorage.getItem('token')}`;
+
+        axios
+            .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': newId }, { headers: { authorization: headthing } })
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }
 
     const [open, setOpen] = useState(false);
 
@@ -239,12 +259,12 @@ const Game = props => {
                         <div className={classes.mainBottom}>
                             <div className={classes.descWindow}>
                                 <div className={classes.descTitle}>
-                                    {worldArray[0]
+                                    {worldArray[0] && player
                                         ? worldArray[player.x][player.y].title
                                         : ""}
                                 </div>
                                 <div className={classes.desc}>
-                                    {worldArray[0]
+                                    {worldArray[0] && player
                                         ? worldArray[player.x][player.y].desc
                                         : ""}
                                 </div>
