@@ -31,7 +31,7 @@ const landingStyles = makeStyles(theme => ({
         userSelect: "none",
         "&.active": {
             background: "#c4c4c4",
-            color: "#202020"
+            color: "#202020",
         },
     },
     window: {
@@ -62,6 +62,10 @@ const landingStyles = makeStyles(theme => ({
         "& .MuiInput-underline:after": {
             borderBottomColor: "#c4c4c4",
         },
+        "& .MuiInputBase-root": {
+            color: "#c4c4c4",
+            fontFamily: "sans-serif",
+        },
         "& .MuiOutlinedInput-root": {
             "& fieldset": {
                 border: ".3rem solid #c4c4c4",
@@ -77,10 +81,10 @@ const landingStyles = makeStyles(theme => ({
             },
         },
     },
-    input: {
-        color: "#c4c4c4",
-        fontFamily: "sans-serif",
-    },
+    // input: {
+    //     color: "#c4c4c4",
+    //     fontFamily: "sans-serif",
+    // },
     button: {
         display: "flex",
         padding: ".3rem 3rem",
@@ -127,16 +131,16 @@ const landingStyles = makeStyles(theme => ({
     },
     signout: {
         display: "flex",
-        height: '3rem',
-        width: '3.5rem',
-        '& svg': {
+        height: "3rem",
+        width: "3.5rem",
+        "& svg": {
             display: "flex",
             height: "100%",
         },
-        '& svg g': {
+        "& svg g": {
             fill: "#c4c4c4",
-        }
-    }
+        },
+    },
 }));
 
 export default landingStyles;
