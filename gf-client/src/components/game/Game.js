@@ -54,6 +54,7 @@ const Game = props => {
         x: 20,
         y: 20,
     });
+    const [serverPlayer, setServerPlayer] = useState([]);
 
     const wPress = useKeyPress("w");
     const aPress = useKeyPress("a");
@@ -78,6 +79,22 @@ const Game = props => {
                     pulled_worlds[world[i].x][world[i].y] = world[i];
                 }
                 setWorldArray([...pulled_worlds]);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        //Get Player information
+        const token = `"Authorization": "Token ${localStorage.getItem('token')}"`;
+        console.log(token)
+        
+        axios
+            .get("https://gnarly-funky.herokuapp.com/api/adv/init/", { header: {token} })
+            .then(response => {
+                setServerPlayer(response.data)
+                console.log(serverPlayer)
             })
             .catch(error => {
                 console.log(error);
