@@ -5,15 +5,12 @@ import Chat from "./Chat";
 import WorldMap from "./WorldMap";
 import axios from "axios";
 import Minimap from "./Minimap";
-import { spread } from "q";
 
 function useKeyPress(targetKey) {
     // State for keeping track of whether key is pressed
-
     const [keyPressed, setKeyPressed] = useState(false);
 
     // If pressed key is our target key then set to true
-
     function downHandler({ key }) {
         if (key === targetKey) {
             setKeyPressed(true);
@@ -21,7 +18,6 @@ function useKeyPress(targetKey) {
     }
 
     // If released key is our target key then set to false
-
     const upHandler = ({ key }) => {
         if (key === targetKey) {
             setKeyPressed(false);
@@ -29,17 +25,12 @@ function useKeyPress(targetKey) {
     };
 
     // Add event listeners
-
     useEffect(() => {
         window.addEventListener("keydown", downHandler);
-
         window.addEventListener("keyup", upHandler);
-
         // Remove event listeners on cleanup
-
         return () => {
             window.removeEventListener("keydown", downHandler);
-
             window.removeEventListener("keyup", upHandler);
         };
     }, []); // Empty array ensures that effect is only run on mount and unmount
@@ -72,8 +63,8 @@ const Game = props => {
                     }
                 }
                 let world = response.data.world;
-                console.dir(response.data.world);
-                console.log(JSON.stringify(response.data.world));
+                // console.dir(response.data.world);
+                // console.log(JSON.stringify(response.data.world));
                 for (let i = 0; i < world.length; i++) {
                     pulled_worlds[world[i].x][world[i].y] = world[i];
                 }
@@ -109,25 +100,25 @@ const Game = props => {
         if (wPress === true && worldArray[player.x][player.y].north) {
             setPlayer({
                 ...player,
-                y: player.y-1
-            })
+                y: player.y - 1,
+            });
         } else if (aPress === true && worldArray[player.x][player.y].west) {
             setPlayer({
                 ...player,
-                x: player.x-1
-            })
+                x: player.x - 1,
+            });
         } else if (sPress === true && worldArray[player.x][player.y].south) {
             setPlayer({
                 ...player,
-                y: player.y+1
-            })
+                y: player.y + 1,
+            });
         } else if (dPress === true && worldArray[player.x][player.y].east) {
             setPlayer({
                 ...player,
-                x: player.x+1
-            })
+                x: player.x + 1,
+            });
         }
-    }, [wPress, aPress, sPress, dPress])
+    }, [wPress, aPress, sPress, dPress]);
 
     return (
         <div className={classes.root}>
@@ -143,20 +134,34 @@ const Game = props => {
                 {worldArray ? (
                     <div className={classes.window}>
                         <WorldMap worldArray={worldArray} player={player} />
+                        <div className={classes.mainBottom}>
+                            <div className={classes.descWindow}>
+                                <div className={classes.descTitle}>
+                                    {worldArray[0]
+                                        ? worldArray[player.x][player.y].title
+                                        : ""}
+                                </div>
+                                <div className={classes.desc}>
+                                    {worldArray[0]
+                                        ? worldArray[player.x][player.y].desc
+                                        : ""}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 ) : (
-                    <div className={classes.window}>
-                        <p>LOADING...</p>
-                    </div>
-                )}
+                        <div className={classes.window}>
+                            <p>LOADING...</p>
+                        </div>
+                    )}
 
                 <div className={classes.sidebar}>
                     <div className={classes.top}>
                         {worldArray ? (
                             <Minimap worldArray={worldArray} player={player} />
                         ) : (
-                            <p>LOADING...</p>
-                        )}
+                                <p>LOADING...</p>
+                            )}
                     </div>
                     <div className={classes.bottom}>
                         <div className={classes.tabs}>

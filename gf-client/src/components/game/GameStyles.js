@@ -7,6 +7,7 @@ const gameStyles = makeStyles(theme => ({
         width: "80%",
         height: "80%",
         color: "#c4c4c4",
+        maxWidth: "800px",
     },
     menu: {
         display: "flex",
@@ -43,6 +44,7 @@ const gameStyles = makeStyles(theme => ({
         width: "70%",
         border: ".3rem solid #202020",
         background: "#4a4a4a",
+        maxHeight: "100%",
     },
     sidebar: {
         display: "flex",
@@ -82,6 +84,32 @@ const gameStyles = makeStyles(theme => ({
             background: "#c4c4c4",
             color: "#202020"
         }
+    },
+    mainBottom: {
+        display: "flex",
+        width: "100%",
+        height: "20%",
+    },
+    descWindow: {
+        display: "flex",
+        width: "70%",
+        paddingRight: "2%",
+        flexDirection: "column",
+        marginLeft: "2%",
+        marginTop: "1%",
+        overflowY: "auto",
+        borderRight: ".3rem solid #202020",
+        maxHeight: "100%",
+    },
+    descTitle: {
+        fontSize: "3rem",
+        width: "100%",
+        borderBottom: ".2rem solid #c4c4c4",
+        marginBottom: ".3rem",
+        lineHeight: "2rem",
+    },
+    desc: {
+        fontSize: "2rem",
     }
 }))
 
