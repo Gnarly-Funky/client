@@ -60,11 +60,8 @@ const SendMove = (room) => {
 const Game = props => {
     const [worldArray, setWorldArray] = useState();
     const [worldSize, setWorldSize] = useState(0);
-    const [player, setPlayer] = useState({})
-    setPlayer({
-        x: 20,
-        y: 20,
-    });
+    const [player, setPlayer] = useState({x: 20,
+        y: 20});
     
     useEffect(() => {
         axios
