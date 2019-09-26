@@ -5,14 +5,60 @@ import Chat from "./Chat";
 import WorldMap from "./WorldMap";
 import axios from "axios";
 import Minimap from "./Minimap";
+import { spread } from "q";
+
+function useKeyPress(targetKey) {
+    // State for keeping track of whether key is pressed
+
+    const [keyPressed, setKeyPressed] = useState(false);
+
+    // If pressed key is our target key then set to true
+
+    function downHandler({ key }) {
+        if (key === targetKey) {
+            setKeyPressed(true);
+        }
+    }
+
+    // If released key is our target key then set to false
+
+    const upHandler = ({ key }) => {
+        if (key === targetKey) {
+            setKeyPressed(false);
+        }
+    };
+
+    // Add event listeners
+
+    useEffect(() => {
+        window.addEventListener("keydown", downHandler);
+
+        window.addEventListener("keyup", upHandler);
+
+        // Remove event listeners on cleanup
+
+        return () => {
+            window.removeEventListener("keydown", downHandler);
+
+            window.removeEventListener("keyup", upHandler);
+        };
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
+    return keyPressed;
+}
 
 const Game = props => {
     const [worldArray, setWorldArray] = useState();
     const [worldSize, setWorldSize] = useState(0);
-    let player = {
-        x: 32,
-        y: 28,
-    };
+    const [player, setPlayer] = useState({
+        x: 20,
+        y: 20,
+    });
+
+    const wPress = useKeyPress("w");
+    const aPress = useKeyPress("a");
+    const sPress = useKeyPress("s");
+    const dPress = useKeyPress("d");
 
     useEffect(() => {
         axios
@@ -57,6 +103,31 @@ const Game = props => {
         e.preventDefault();
         setCurrentTab("chat");
     };
+
+    useEffect(() => {
+        console.log(wPress);
+        if (wPress === true) {
+            setPlayer({
+                ...player,
+                y: player.y-1
+            })
+        } else if (aPress === true) {
+            setPlayer({
+                ...player,
+                x: player.x-1
+            })
+        } else if (sPress === true) {
+            setPlayer({
+                ...player,
+                y: player.y+1
+            })
+        } else if (dPress === true) {
+            setPlayer({
+                ...player,
+                x: player.x+1
+            })
+        }
+    }, [wPress, aPress, sPress, dPress])
 
     return (
         <div className={classes.root}>
