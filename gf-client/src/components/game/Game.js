@@ -106,22 +106,22 @@ const Game = props => {
 
     useEffect(() => {
         console.log(wPress);
-        if (wPress === true) {
+        if (wPress === true && worldArray[player.x][player.y].north) {
             setPlayer({
                 ...player,
                 y: player.y-1
             })
-        } else if (aPress === true) {
+        } else if (aPress === true && worldArray[player.x][player.y].west) {
             setPlayer({
                 ...player,
                 x: player.x-1
             })
-        } else if (sPress === true) {
+        } else if (sPress === true && worldArray[player.x][player.y].south) {
             setPlayer({
                 ...player,
                 y: player.y+1
             })
-        } else if (dPress === true) {
+        } else if (dPress === true && worldArray[player.x][player.y].east) {
             setPlayer({
                 ...player,
                 x: player.x+1
