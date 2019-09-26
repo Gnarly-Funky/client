@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import gameStyles from "./GameStyles";
 import Signout from "../../assets/Signout";
 import Chat from "./Chat";
@@ -6,6 +6,8 @@ import WorldMap from "./WorldMap";
 import axios from "axios";
 import Minimap from "./Minimap";
 import Inventory from "./Inventory";
+
+
 
 function useKeyPress(targetKey) {
     // State for keeping track of whether key is pressed
@@ -87,21 +89,42 @@ const Game = props => {
         });
     }, []);
 
+
     useEffect(() => {
-        //Get Initial player information
-        const headthing = `Token ${localStorage.getItem('token')}`;
+        let interval = setInterval(() => {
+            //Get Initial player information
+            const headthing = `Token ${localStorage.getItem('token')}`;
         
-        axios
-            .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
-            .then(response => {
-                console.log(response.data)
-                setServerPlayer(response.data)
-                setPlayer({x:response.data.room_x,y:response.data.room_y})
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            axios
+                .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+                .then(response => {
+                    console.log(response.data)
+                    setServerPlayer(response.data)
+                    setPlayer({ x: response.data.room_x, y: response.data.room_y })
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }, 5000)
     }, []);
+    
+  
+
+    // useEffect(() => {
+    //     //Get Initial player information
+    //     const headthing = `Token ${localStorage.getItem('token')}`;
+        
+    //     axios
+    //         .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+    //         .then(response => {
+    //             console.log(response.data)
+    //             setServerPlayer(response.data)
+    //             setPlayer({x:response.data.room_x,y:response.data.room_y})
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // }, []);
 
 
 
