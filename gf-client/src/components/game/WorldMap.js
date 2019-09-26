@@ -52,7 +52,7 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
             // console.log(newArr)
             setDisplayArr([...newArr])
         }
-    }, [worldArray]);
+    }, [worldArray, player]);
 
     useEffect(() => {
         console.log(displayArr)

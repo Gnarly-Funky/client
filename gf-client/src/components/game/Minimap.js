@@ -57,7 +57,7 @@ const Minimap = ({ columns = 20, player, worldArray }) => {
             // console.log(newArr)
             setDisplayArr([...newArr]);
         }
-    }, [worldArray]);
+    }, [worldArray, player]);
 
     return (
         <div className={classes.minimap}>
