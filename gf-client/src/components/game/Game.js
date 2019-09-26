@@ -39,6 +39,56 @@ function useKeyPress(targetKey) {
     return keyPressed;
 }
 
+
+const KeyHandle = (key, e) => {
+    switch (key) {
+        case 'up':
+            HandleMove(key);
+            break;
+        case 'left':
+            HandleMove(key);
+            break;
+        case 'right':
+            HandleMove(key);
+            break;
+        case 'down':
+            HandleMove(key);
+            break;
+        default:
+            break;
+    }
+}
+
+const HandleMove = (dir) => {
+    switch (dir) {
+        case 'left':
+            console.log('move left');
+            break;
+        case 'right':
+            console.log('move right');
+            break;
+        case 'up':
+            console.log('move up');
+            break;
+        case 'down':
+            console.log('move down');
+            break;
+        default:
+            break;
+    }
+}
+
+const SendMove = (room) => {
+   axios
+        .post("https://gnarly-funky.herokuapp.com/api/adv/move/", `{"room_id": ${room}}`)
+        .then(response => {
+            
+        })
+        .catch(error => {
+            console.log(error);
+        }); 
+}
+
 const Game = props => {
     const [worldArray, setWorldArray] = useState();
     const [worldSize, setWorldSize] = useState(0);
@@ -61,36 +111,36 @@ const Game = props => {
                     pulled_worlds[row] = [];
                     for (let col = 0; col < 41; col++) {
                         pulled_worlds[row].push(null);
-                    }
                 }
-                let world = response.data.world;
-                // console.dir(response.data.world);
-                // console.log(JSON.stringify(response.data.world));
-                for (let i = 0; i < world.length; i++) {
-                    pulled_worlds[world[i].x][world[i].y] = world[i];
-                }
-                setWorldArray([...pulled_worlds]);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            }
+            let world = response.data.world;
+            console.dir(response.data.world);
+            console.log(JSON.stringify(response.data.world));
+            for (let i = 0; i < world.length; i++) {
+                pulled_worlds[world[i].x][world[i].y] = world[i];
+            }
+            setWorldArray([...pulled_worlds]);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }, []);
-
+    
     const classes = gameStyles();
-
+    
     const [currentTab, setCurrentTab] = useState("chat");
-
+    
     const logout = e => {
         e.preventDefault();
         localStorage.removeItem("token");
         props.history.push("/");
     };
-
+    
     const inventoryTab = e => {
         e.preventDefault();
         setCurrentTab("inventory");
     };
-
+    
     const chatTab = e => {
         e.preventDefault();
         setCurrentTab("chat");
@@ -169,21 +219,21 @@ const Game = props => {
                             <div
                                 className={
                                     currentTab === "chat"
-                                        ? classes.tab + " active"
-                                        : classes.tab
+                                    ? classes.tab + " active"
+                                    : classes.tab
                                 }
                                 onClick={chatTab}
-                            >
+                                >
                                 Chat
                             </div>
                             <div
                                 className={
                                     currentTab === "inventory"
-                                        ? classes.tab + " active"
-                                        : classes.tab
+                                    ? classes.tab + " active"
+                                    : classes.tab
                                 }
                                 onClick={inventoryTab}
-                            >
+                                >
                                 Inventory
                             </div>
                         </div>
@@ -196,3 +246,4 @@ const Game = props => {
 };
 
 export default Game;
+
