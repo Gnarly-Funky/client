@@ -4,7 +4,7 @@ import Pusher from "pusher-js";
 import axios from "axios";
 
 const Chat = props => {
-    const [messages, setMessages] = useState(["asdf", "asdf"]);
+    const [messages, setMessages] = useState([]);
 
     const [message, setMessage] = useState("");
 
@@ -15,18 +15,20 @@ const Chat = props => {
         setMessages([...newMessages]);
     }
 
-    useEffect(() => {
-        const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
-            cluster: process.env.REACT_APP_PUSHER_CLUSTER,
-        });
+    const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
+        cluster: process.env.REACT_APP_PUSHER_CLUSTER,
+    });
 
-        const channel = pusher.subscribe("a_channel");
+    const channel = pusher.subscribe("a_channel");
+
+    useEffect(() => {
 
         channel.bind("an_event", data => {
             const newMessage = `${data.name}: ${data.message}`
             addMessage(newMessage);
             channel.unbind_all();
         });
+
     }, [messages]);
 
     const classes = gameStyles();
@@ -55,8 +57,8 @@ const Chat = props => {
     };
 
     return (
-        <div>
-            <div className={classes.chat}>
+        <div className={classes.chat}>
+            <div className={classes.chatSection}>
                 {messages.map(message => (
                     <div className={classes.message}>{message}</div>
                 ))}
