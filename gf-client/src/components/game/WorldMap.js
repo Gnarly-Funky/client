@@ -22,7 +22,7 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
             let newArr = []
             for (let y = 0; y < columns; y++) {
                 for (let x = 0; x < columns; x++) {
-                    if (currentX > 40 || currentY > 40) {
+                    if ((currentX > 40 || currentY > 40) || (currentX < 0 || currentY < 0)) {
                         newArr=[...newArr, "null"]
                     } else if (worldArray[currentX][currentY] === null) {
                         newArr = [...newArr, "null"]
@@ -60,9 +60,12 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
 
     return (
         <div className={classes.worldMap}>
-            {displayArr.map(tile => (
-                <Tile className="world-map-tile" icon={tile} />
-            ))}
+            {displayArr.map((tile, index) => {
+                if (index === 40) {
+                    return <Tile icon={tile} player={true}/>
+                }
+                return <Tile icon={tile} />
+            })}
         </div>
     );
 };

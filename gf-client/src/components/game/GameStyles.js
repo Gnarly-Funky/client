@@ -52,6 +52,7 @@ const gameStyles = makeStyles(theme => ({
         border: ".3rem solid #202020",
     },
     top: {
+        display: "flex",
         border: ".3rem solid #4a4a4a",
         height: "30%",
         width: "100%",

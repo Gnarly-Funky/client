@@ -4,13 +4,14 @@ import Signout from "../../assets/Signout";
 import Chat from "./Chat";
 import WorldMap from "./WorldMap";
 import axios from "axios";
+import Minimap from "./Minimap";
 
 const Game = props => {
     const [worldArray, setWorldArray] = useState();
     const [worldSize, setWorldSize] = useState(0);
     let player = {
-        x: 40,
-        y: 40,
+        x: 32,
+        y: 28,
     };
 
     useEffect(() => {
@@ -79,7 +80,13 @@ const Game = props => {
                 )}
 
                 <div className={classes.sidebar}>
-                    <div className={classes.top}></div>
+                    <div className={classes.top}>
+                        {worldArray ? (
+                            <Minimap worldArray={worldArray} player={player} />
+                        ) : (
+                            <p>LOADING...</p>
+                        )}
+                    </div>
                     <div className={classes.bottom}>
                         <div className={classes.tabs}>
                             <div

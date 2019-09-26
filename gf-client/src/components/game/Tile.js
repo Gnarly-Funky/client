@@ -21,22 +21,31 @@ const Tile = props => {
     const classes = makeStyles(theme => ({
         tile: {
             display: "flex",
-            width: "11%",
+            position: "relative",
+            width: "11.11%",
             margin: "0",
-            background: "black",
+            background: "#4a4a4a",
             "& svg": {
-                fill: "gray",
+                fill: "#000",
             },
         },
         emptyTile: {
             display: "flex",
-            width: "11%",
+            width: "11.11%",
             margin: "0",
-            background: "black",
+            background: "#202020",
             "& svg": {
                 fill: "rgba(0,0,0,0)",
             },
         },
+        player: {
+            position: "absolute",
+            width: "20%",
+            height: "20%",
+            top: "40%",
+            left: "40%",
+            background: "#d94a38"
+        }
     }))();
 
     //NSEW
@@ -44,96 +53,176 @@ const Tile = props => {
         case "NSEW":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <NSEW />
                 </div>
             );
         case "NSE":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <NSE />
                 </div>
             );
         case "NSW":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <NSW />
                 </div>
             );
         case "NEW":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <NEW />
                 </div>
             );
         case "SEW":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <SEW />
                 </div>
             );
         case "NE":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <NE />
                 </div>
             );
         case "NW":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <NW />
                 </div>
             );
         case "SE":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <SE />
                 </div>
             );
         case "SW":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <SW />
                 </div>
             );
         case "EW":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <EW />
                 </div>
             );
         case "NS":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <NS />
                 </div>
             );
         case "N":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <N />
                 </div>
             );
         case "S":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <S />
                 </div>
             );
         case "E":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <E />
                 </div>
             );
         case "W":
             return (
                 <div className={classes.tile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <W />
                 </div>
             );
         default:
             return (
                 <div className={classes.emptyTile}>
+                    {props.player ? (
+                        <div className={classes.player} />
+                    ) : (
+                        <div />
+                    )}
                     <E />
                 </div>
             );
