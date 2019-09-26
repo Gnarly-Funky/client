@@ -87,23 +87,39 @@ const Game = props => {
         });
     }, []);
 
-    useEffect(() => {
-        //Get Initial player information
-        const headthing = `Token ${localStorage.getItem('token')}`;
+    // useEffect(() => {
+    //     //Get Initial player information
+    //     const headthing = `Token ${localStorage.getItem('token')}`;
         
-        axios
-            .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
-            .then(response => {
-                console.log(response.data)
-                setServerPlayer(response.data)
-                setPlayer({x:response.data.room_x,y:response.data.room_y})
-            })
-            .catch(error => {
-                console.log(error);
-            });
+    //     axios
+    //         .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+    //         .then(response => {
+    //             console.log(response.data)
+    //             setServerPlayer(response.data)
+    //             setPlayer({x:response.data.room_x,y:response.data.room_y})
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // }, []);
+
+useEffect(() => {
+        let interval = setInterval(() => {
+            //Get Initial player information
+            const headthing = `Token ${localStorage.getItem('token')}`;
+        
+            axios
+                .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+                .then(response => {
+                    console.log(response.data)
+                    setServerPlayer(response.data)
+                    setPlayer({ x: response.data.room_x, y: response.data.room_y })
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }, 5000)
     }, []);
-
-
 
     const classes = gameStyles();
     
