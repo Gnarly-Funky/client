@@ -5,6 +5,7 @@ import Chat from "./Chat";
 import WorldMap from "./WorldMap";
 import axios from "axios";
 import Minimap from "./Minimap";
+import Inventory from "./Inventory";
 
 function useKeyPress(targetKey) {
     // State for keeping track of whether key is pressed
@@ -186,7 +187,7 @@ const Game = props => {
                                 Inventory
                             </div>
                         </div>
-                        <Chat />
+                        {currentTab === "chat" ? <Chat /> : <Inventory />}
                     </div>
                 </div>
             </div>

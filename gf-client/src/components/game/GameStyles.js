@@ -61,9 +61,11 @@ const gameStyles = makeStyles(theme => ({
     },
     bottom: {
         display: "flex",
+        flexDirection: "column",
         width: "100%",
         height: "70%",
-        border: ".3rem solid #4a4a4a"
+        border: ".3rem solid #4a4a4a",
+        alignItems: "center",
     },
     tabs: {
         display: "flex",
@@ -109,6 +111,10 @@ const gameStyles = makeStyles(theme => ({
         lineHeight: "2rem",
     },
     desc: {
+        fontSize: "2rem",
+        lineHeight: "1.5rem",
+    },
+    inventory: {
         fontSize: "2rem",
     }
 }))
