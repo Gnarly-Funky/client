@@ -35,8 +35,8 @@ const Chat = props => {
         e.preventDefault();
         const headthing = `Token ${localStorage.getItem("token")}`;
         axios
-            // .post("https://gnarly-funky.herokuapp.com/ajax/chat/", {
-            .post("http://127.0.0.1:8000/ajax/chat/", {
+            .post("https://gnarly-funky.herokuapp.com/ajax/chat/", {
+            // .post("http://127.0.0.1:8000/ajax/chat/", {
                 headers: {
                     authorization: headthing
                 },
