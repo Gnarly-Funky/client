@@ -247,16 +247,6 @@ const Game = props => {
                                         : ""}
                                 </div>
                             </div>
-                            <div >
-                                <div className={classes.playerlistTitle}>Playerlist</div>
-                                <div>
-                                    {roomPlayers.map(player => {
-                                        return(
-                                        <div key={player.username} className={classes.playerlist}>{player.username}</div>
-                                    )
-                                    })}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 ) : (
@@ -297,7 +287,7 @@ const Game = props => {
                             </div>
                         </div>
                         {currentTab === "chat" ? <Chat setFocus={setFocus} serverPlayer={serverPlayer}/> : <div>
-                                    {serverPlayer.other_players.map(player => {
+                                    {roomPlayers.map(player => {
                                         return(
                                         <div key={player.username} className={classes.playerlist}>{player.username}</div>
                                     )
