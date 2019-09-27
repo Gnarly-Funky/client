@@ -239,6 +239,9 @@ const Game = props => {
                                         : ""}
                                 </div>
                             </div>
+                            <div className={classes.playerlist}>
+                                <p>Playerlist</p>
+                            </div>
                         </div>
                     </div>
                 ) : (
