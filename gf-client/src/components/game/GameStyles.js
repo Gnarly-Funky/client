@@ -131,7 +131,7 @@ const gameStyles = makeStyles(theme => ({
         hyphens: "auto",
     },
     message: {
-        // marginTop: "1rem",
+        marginTop: "1rem",
         display: "flex",
         width: "100%",
         maxWidth: "100%",
