@@ -114,6 +114,18 @@ const gameStyles = makeStyles(theme => ({
         fontSize: "2rem",
         lineHeight: "1.5rem",
     },
+    playerlist: {
+        marginLeft: "2%",
+        fontSize: "2rem",
+        marginBottom: ".3rem",
+        lineHeight: "1.8rem",
+    },
+    playerlistTitle: {
+        marginLeft: "2%",
+        fontSize: "3rem",
+        marginBottom: ".3rem",
+        lineHeight: "2rem",
+    },
     inventory: {
         fontSize: "2rem",
     },
