@@ -22,11 +22,16 @@ const Chat = props => {
     const channel = pusher.subscribe("a_channel");
 
     useEffect(() => {
+        const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
+            cluster: process.env.REACT_APP_PUSHER_CLUSTER,
+        });
+    
+        const channel = pusher.subscribe("a_channel");
 
         channel.bind("an_event", data => {
             const newMessage = `${data.name}: ${data.message}`
             addMessage(newMessage);
-            channel.unbind_all();
+            pusher.disconnect();
         });
 
     }, [messages]);
