@@ -25,7 +25,7 @@ const Chat = props => {
         return () => {
             pusher.disconnect();
         };
-    }, []);
+    }, [pusher]);
 
     useEffect(() => {
         const channel = pusher.subscribe("a_channel");

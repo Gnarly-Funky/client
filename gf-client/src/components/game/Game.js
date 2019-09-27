@@ -112,21 +112,16 @@ const Game = props => {
         axios
             .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
             .then(response => {
-                console.log(response.data)
                 let myId = response.data.room_id
                 setServerPlayer(response.data)
                 setPlayer({ x: response.data.room_x, y: response.data.room_y })
                 axios
                     .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': myId }, { headers: { authorization: headthing } })
                     .then(response => {
-                        // const otherPlayers = response.data.other_players.filter(p => )
-                        console.log(response.data.other_players)
-
                         setRoomPlayers(response.data.other_players)
-                        console.log(`other players in my room: ${ response.data.other_players }`)
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.error(error);
                     });
 
             })
@@ -189,7 +184,7 @@ const Game = props => {
             .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': newId }, { headers: { authorization: headthing } })
             .then(response => {
                 if (response.data.other_players) {
-                    setRoomPlayers(response.data.other_players)
+                    setRoomPlayers(response.data.other_players);
                 }
             })
             .catch(error => {
@@ -304,7 +299,7 @@ const Game = props => {
                         {currentTab === "chat" ? <Chat setFocus={setFocus} serverPlayer={serverPlayer}/> : <div>
                                     {serverPlayer.other_players.map(player => {
                                         return(
-                                        <div className={classes.playerlist}>{player.username}</div>
+                                        <div key={player.username} className={classes.playerlist}>{player.username}</div>
                                     )
                                     })}
                                 </div>}
