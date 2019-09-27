@@ -55,9 +55,11 @@ const landingStyles = makeStyles(theme => ({
     textField: {
         "& label.Mui-focused": {
             color: "#c4c4c4",
+            textShadow: "2px 2px #000000"
         },
         "& label": {
             color: "#c4c4c4",
+            textShadow: "2px 2px #000000"
         },
         "& .MuiInput-underline:after": {
             borderBottomColor: "#c4c4c4",
@@ -65,6 +67,7 @@ const landingStyles = makeStyles(theme => ({
         "& .MuiInputBase-root": {
             color: "#c4c4c4",
             fontFamily: "sans-serif",
+            textShadow: "2px 2px #000000"
         },
         "& .MuiOutlinedInput-root": {
             "& fieldset": {
@@ -113,6 +116,7 @@ const landingStyles = makeStyles(theme => ({
         textAlign: "center",
         textDecoration: "underline",
         margin: "1rem 0",
+        textShadow: "2px 2px #000000"
     },
     errorDescription: {
         color: "red",
@@ -122,12 +126,14 @@ const landingStyles = makeStyles(theme => ({
         textTransform: "uppercase",
         textAlign: "center",
         marginTop: "1rem",
+        textShadow: "2px 2px #000000"
     },
     errorContainer: {
         margin: ".5rem",
     },
     header: {
         fontSize: "5rem",
+        textShadow: "2px 2px #000000"
     },
     signout: {
         display: "flex",

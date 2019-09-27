@@ -22,6 +22,7 @@ const gameStyles = makeStyles(theme => ({
         height: "100%",
         alignItems: "center",
         fontSize: "3rem",
+        textShadow: "2px 2px #000000",
         border: ".3rem solid #202020",
         background: "#4a4a4a",
         padding: "1rem",
@@ -29,9 +30,10 @@ const gameStyles = makeStyles(theme => ({
         '& svg': {
             height: "3rem",
             width: "3rem",
+            filter: "drop-shadow( 2px 2px rgba(0, 0, 0, 1))",
         },
         '& svg g': {
-            fill: "#c4c4c4"
+            fill: "#c4c4c4",
         }
     },
     main: {
@@ -105,19 +107,23 @@ const gameStyles = makeStyles(theme => ({
     descTitle: {
         fontSize: "3rem",
         width: "100%",
+        color: "rgb(217,74,56)",
         borderBottom: ".2rem solid #c4c4c4",
         marginBottom: ".3rem",
         lineHeight: "2rem",
+        textShadow: "2px 2px #000000"
     },
     desc: {
         fontSize: "2rem",
         lineHeight: "1.5rem",
+        textShadow: "1px 1px #000000"
     },
     playerlist: {
         marginLeft: "2%",
-        fontSize: "2rem",
+        fontSize: "2.5rem",
         marginBottom: ".3rem",
         lineHeight: "1.8rem",
+        textShadow: "2px 2px #000000"
     },
     playerlistTitle: {
         marginLeft: "2%",
@@ -145,6 +151,7 @@ const gameStyles = makeStyles(theme => ({
         hyphens: "auto",
         overflowY: "auto",
         overflowX: "hidden",
+        textShadow: "1px 1px #000000"
     },
     message: {
         marginLeft: "1rem",
