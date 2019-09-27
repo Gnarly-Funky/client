@@ -132,23 +132,44 @@ const gameStyles = makeStyles(theme => ({
     chat: {
         display: "flex",
         flexDirection: "column",
-        margin: "1rem",
         width: "100%",
+        height: "100%",
+        justifyContent: "space-between",
+        alignItems: "center",
     },
     chatSection: {
         display: "flex",
         flexDirection: "column",
         width: "100%",
+        height: "80%",
         wordBreak: "break-word",
         hyphens: "auto",
+        overflowY: "auto",
+        overflowX: "hidden",
     },
     message: {
-        marginTop: "1rem",
+        marginLeft: "1rem",
+        marginRight: "1rem",
+        marginBottom: "1rem",
         display: "flex",
         width: "100%",
         maxWidth: "100%",
         fontSize: "2rem",
         lineHeight: "1rem",
+    },
+    chatInput: {
+        border: ".3rem solid #4a4a4a",
+        background: "#202020",
+        color: "#c4c4c4",
+        width: "100%",
+        height: "100%",
+        fontSize: "3rem",
+        fontFamily: "Visitor, 'sans-serif'",
+        padding: "1rem",
+    },
+    chatForm: {
+        width: "100%",
+        height: "10%",
     }
 }))
 

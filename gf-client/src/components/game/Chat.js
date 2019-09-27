@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import gameStyles from "./GameStyles";
 import Pusher from "pusher-js";
 import axios from "axios";
@@ -8,28 +8,41 @@ const Chat = props => {
 
     const [message, setMessage] = useState("");
 
-    const addMessage = (newMessage) => {
+    const chatRef = useRef(null);
+
+    const addMessage = newMessage => {
         console.log("add message ", messages);
-        const newMessages = [...messages, newMessage]
+        const newMessages = [...messages, newMessage];
         // console.log(messages);
         setMessages([...newMessages]);
-    }
+    };
 
-    const [pusher,] = useState(new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
-        cluster: process.env.REACT_APP_PUSHER_CLUSTER,
-    }))
-
+    const [pusher] = useState(
+        new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
+            cluster: process.env.REACT_APP_PUSHER_CLUSTER,
+        })
+    );
 
     useEffect(() => {
-    
+        return () => {
+            pusher.disconnect();
+        };
+    }, []);
+
+    useEffect(() => {
         const channel = pusher.subscribe("a_channel");
 
         channel.bind("an_event", data => {
-            const newMessage = `${data.name}: ${data.message}`
+            const newMessage = `${data.name}: ${data.message}`;
             addMessage(newMessage);
             channel.unbind_all();
+            pusher.unsubscribe("a_channel");
         });
 
+        if (chatRef) {
+            console.dir(chatRef);
+            chatRef.current.scrollIntoView()
+        }
     }, [messages]);
 
     const classes = gameStyles();
@@ -39,15 +52,15 @@ const Chat = props => {
         const headthing = `Token ${localStorage.getItem("token")}`;
         axios
             .post("https://gnarly-funky.herokuapp.com/ajax/chat/", {
-            // .post("http://127.0.0.1:8000/ajax/chat/", {
+                // .post("http://127.0.0.1:8000/ajax/chat/", {
                 headers: {
-                    authorization: headthing
+                    authorization: headthing,
                 },
                 message: message,
-                username: props.serverPlayer.player_name
+                username: props.serverPlayer.player_name,
             })
             .then(() => {
-                setMessage("")
+                setMessage("");
             })
             .catch(err => {
                 console.dir(err);
@@ -65,8 +78,9 @@ const Chat = props => {
                 {messages.map(message => (
                     <div className={classes.message}>{message}</div>
                 ))}
+                <div ref={chatRef}/>
             </div>
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className={classes.chatForm}>
                 <input
                     type="text"
                     className={classes.chatInput}
