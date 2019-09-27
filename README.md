@@ -1,6 +1,6 @@
 # GNARLY FUNKY CLIENT
 
-This repository contains the client for the Gnarly Funky build week team. This React app serves up a multiplayer real-time vitual world (MUD) from a Django back-end.
+This repository contains the client for the Gnarly Funky build week team. This React app serves up a multiplayer real-time virtual world (MUD) from a Django back-end.
 
 ## TABLE OF CONTENTS
 
