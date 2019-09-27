@@ -11,9 +11,7 @@ const Chat = props => {
     const chatRef = useRef(null);
 
     const addMessage = newMessage => {
-        console.log("add message ", messages);
         const newMessages = [...messages, newMessage];
-        // console.log(messages);
         setMessages([...newMessages]);
     };
 

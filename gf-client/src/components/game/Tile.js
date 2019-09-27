@@ -17,7 +17,6 @@ import W from "../../assets/Main/js/W";
 import { makeStyles } from "@material-ui/styles";
 
 const Tile = props => {
-    // console.log(props.icon);
     const classes = makeStyles(theme => ({
         tile: {
             display: "flex",
