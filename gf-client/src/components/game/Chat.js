@@ -25,7 +25,7 @@ const Chat = props => {
         return () => {
             pusher.disconnect();
         };
-    }, []);
+    }, [pusher]);
 
     useEffect(() => {
         const channel = pusher.subscribe("a_channel");
@@ -38,7 +38,6 @@ const Chat = props => {
         });
 
         if (chatRef) {
-            console.dir(chatRef);
             chatRef.current.scrollIntoView()
         }
     }, [messages]);

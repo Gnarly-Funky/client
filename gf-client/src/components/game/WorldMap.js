@@ -57,9 +57,9 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
         <div className={classes.worldMap}>
             {displayArr.map((tile, index) => {
                 if (index === 40) {
-                    return <Tile icon={tile} player={true}/>
+                    return <Tile key={index} icon={tile} player={true}/>
                 }
-                return <Tile icon={tile} />
+                return <Tile key={index} icon={tile} />
             })}
         </div>
     );

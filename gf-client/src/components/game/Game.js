@@ -64,6 +64,7 @@ const Game = props => {
         "room_description": "",
         "other_players": [],
     });
+    const [roomPlayers, setRoomPlayers] = useState([])
 
     const [wPress, setWDisabled] = useKeyPress("w");
     const [aPress, setADisabled] = useKeyPress("a");
@@ -111,8 +112,18 @@ const Game = props => {
         axios
             .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
             .then(response => {
+                let myId = response.data.room_id
                 setServerPlayer(response.data)
                 setPlayer({ x: response.data.room_x, y: response.data.room_y })
+                axios
+                    .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': myId }, { headers: { authorization: headthing } })
+                    .then(response => {
+                        setRoomPlayers(response.data.other_players)
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
             })
             .catch(error => {
                 console.error(error);
@@ -172,7 +183,9 @@ const Game = props => {
         axios
             .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': newId }, { headers: { authorization: headthing } })
             .then(response => {
-                // Finish
+                if (response.data.other_players) {
+                    setRoomPlayers(response.data.other_players);
+                }
             })
             .catch(error => {
                 console.error(error);
@@ -237,9 +250,9 @@ const Game = props => {
                             <div >
                                 <div className={classes.playerlistTitle}>Playerlist</div>
                                 <div>
-                                    {serverPlayer.other_players.map(player => {
+                                    {roomPlayers.map(player => {
                                         return(
-                                        <div className={classes.playerlist}>{player.username}</div>
+                                        <div key={player.username} className={classes.playerlist}>{player.username}</div>
                                     )
                                     })}
                                 </div>
@@ -280,10 +293,16 @@ const Game = props => {
                                 }
                                 onClick={inventoryTab}
                             >
-                                Inventory
+                                Players
                             </div>
                         </div>
-                        {currentTab === "chat" ? <Chat setFocus={setFocus} serverPlayer={serverPlayer}/> : <Inventory />}
+                        {currentTab === "chat" ? <Chat setFocus={setFocus} serverPlayer={serverPlayer}/> : <div>
+                                    {serverPlayer.other_players.map(player => {
+                                        return(
+                                        <div key={player.username} className={classes.playerlist}>{player.username}</div>
+                                    )
+                                    })}
+                                </div>}
                     </div>
                 </div>
             </div>
