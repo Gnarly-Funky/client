@@ -15,23 +15,19 @@ const Chat = props => {
         setMessages([...newMessages]);
     }
 
-    const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
+    const [pusher,] = useState(new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
         cluster: process.env.REACT_APP_PUSHER_CLUSTER,
-    });
+    }))
 
-    const channel = pusher.subscribe("a_channel");
 
     useEffect(() => {
-        const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
-            cluster: process.env.REACT_APP_PUSHER_CLUSTER,
-        });
     
         const channel = pusher.subscribe("a_channel");
 
         channel.bind("an_event", data => {
             const newMessage = `${data.name}: ${data.message}`
             addMessage(newMessage);
-            pusher.disconnect();
+            channel.unbind_all();
         });
 
     }, [messages]);
@@ -50,7 +46,9 @@ const Chat = props => {
                 message: message,
                 username: props.serverPlayer.player_name
             })
-            .then(() => {})
+            .then(() => {
+                setMessage("")
+            })
             .catch(err => {
                 console.dir(err);
             });
