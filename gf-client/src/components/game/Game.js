@@ -97,15 +97,13 @@ const Game = props => {
                     }
                 }
                 let world = response.data.world;
-                console.dir(response.data.world);
-                console.log(JSON.stringify(response.data.world));
                 for (let i = 0; i < world.length; i++) {
                     pulled_worlds[world[i].x][world[i].y] = world[i];
                 }
                 setWorldArray([...pulled_worlds]);
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }, []);
 
@@ -130,7 +128,7 @@ const Game = props => {
 
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }, []);
 
@@ -155,7 +153,6 @@ const Game = props => {
     };
 
     useEffect(() => {
-        // console.log(wPress);
         if (!focus) {
             if (wPress === true && worldArray[player.x][player.y].north) {
                 HandleMove(0, -1)
@@ -182,7 +179,6 @@ const Game = props => {
         })
         //find the room ID of the room we are moving to.
         let newId = worldArray[newRoomCoords.x][newRoomCoords.y].id
-        console.log(newId)
 
         const headthing = `Token ${localStorage.getItem('token')}`;
 
@@ -194,7 +190,7 @@ const Game = props => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }
 

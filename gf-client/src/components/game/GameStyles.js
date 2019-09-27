@@ -149,7 +149,7 @@ const gameStyles = makeStyles(theme => ({
     },
     message: {
         marginLeft: "1rem",
-        marginRight: "1rem",
+        marginRight: "3rem",
         marginBottom: "1rem",
         display: "flex",
         width: "100%",

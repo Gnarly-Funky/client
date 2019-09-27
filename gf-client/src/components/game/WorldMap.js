@@ -15,10 +15,8 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
 
     useEffect(() => {
         if (worldArray[0]) {
-            // console.log(worldArray);
             let currentX = player.x - Math.floor(columns / 2);
             let currentY = player.y - Math.floor(columns / 2);
-            // console.log(currentX, currentY)
             let newArr = []
             for (let y = 0; y < columns; y++) {
                 for (let x = 0; x < columns; x++) {
@@ -32,7 +30,6 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
                             tilename += "N";
                         }
                         if (worldArray[currentX][currentY].south === true) {
-                            console.log("hey")
                             tilename += "S";
                         }
                         if (worldArray[currentX][currentY].east === true) {
@@ -45,18 +42,16 @@ const WorldMap = ({ columns = 9, player, worldArray }) => {
                     }
                     currentX++
                 }
-                // console.log(currentY)
                 currentX = player.x - Math.floor(columns / 2)
                 currentY++
             }
-            // console.log(newArr)
             setDisplayArr([...newArr])
         }
     }, [worldArray, player]);
 
-    useEffect(() => {
-        console.log(displayArr)
-    }, [displayArr])
+    // useEffect(() => {
+    //     // Finish
+    // }, [displayArr])
 
     return (
         <div className={classes.worldMap}>
