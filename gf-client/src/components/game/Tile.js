@@ -43,7 +43,8 @@ const Tile = props => {
             height: "20%",
             top: "40%",
             left: "40%",
-            background: "#d94a38"
+            background: "#d94a38",
+            boxShadow: "2px 2px #000000"
         }
     }))();
 
