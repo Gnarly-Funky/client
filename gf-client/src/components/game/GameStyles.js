@@ -91,16 +91,15 @@ const gameStyles = makeStyles(theme => ({
         display: "flex",
         width: "100%",
         height: "20%",
+        overflowY: "auto",
     },
     descWindow: {
         display: "flex",
-        width: "70%",
+        width: "100%",
         paddingRight: "2%",
         flexDirection: "column",
         marginLeft: "2%",
         marginTop: "1%",
-        overflowY: "auto",
-        borderRight: ".3rem solid #202020",
         maxHeight: "100%",
     },
     descTitle: {
