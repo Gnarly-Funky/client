@@ -55,16 +55,16 @@ const Game = props => {
         y: 20,
     });
     const [serverPlayer, setServerPlayer] = useState({
-        "player_uuid": "",
-        "room_uuid": "",
-        "player_id": 0,
-        "player_name": "",
-        "room_id": 0,
-        "room_title": "",
-        "room_description": "",
-        "other_players": [],
+        player_uuid: "",
+        room_uuid: "",
+        player_id: 0,
+        player_name: "",
+        room_id: 0,
+        room_title: "",
+        room_description: "",
+        other_players: [],
     });
-    const [roomPlayers, setRoomPlayers] = useState([])
+    const [roomPlayers, setRoomPlayers] = useState([]);
 
     const [wPress, setWDisabled] = useKeyPress("w");
     const [aPress, setADisabled] = useKeyPress("a");
@@ -73,17 +73,17 @@ const Game = props => {
 
     useEffect(() => {
         if (focus) {
-            setWDisabled(true)
-            setADisabled(true)
-            setSDisabled(true)
-            setDDisabled(true)
+            setWDisabled(true);
+            setADisabled(true);
+            setSDisabled(true);
+            setDDisabled(true);
         } else {
-            setWDisabled(false)
-            setADisabled(false)
-            setSDisabled(false)
-            setDDisabled(false)
+            setWDisabled(false);
+            setADisabled(false);
+            setSDisabled(false);
+            setDDisabled(false);
         }
-    })
+    });
 
     useEffect(() => {
         axios
@@ -108,22 +108,27 @@ const Game = props => {
     }, []);
 
     useEffect(() => {
-        const headthing = `Token ${localStorage.getItem('token')}`;
+        const headthing = `Token ${localStorage.getItem("token")}`;
         axios
-            .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
+            .get("https://gnarly-funky.herokuapp.com/api/adv/init/", {
+                headers: { authorization: headthing },
+            })
             .then(response => {
-                let myId = response.data.room_id
-                setServerPlayer(response.data)
-                setPlayer({ x: response.data.room_x, y: response.data.room_y })
+                let myId = response.data.room_id;
+                setServerPlayer(response.data);
+                setPlayer({ x: response.data.room_x, y: response.data.room_y });
                 axios
-                    .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': myId }, { headers: { authorization: headthing } })
+                    .post(
+                        "https://gnarly-funky.herokuapp.com/api/adv/move/",
+                        { room_id: myId },
+                        { headers: { authorization: headthing } }
+                    )
                     .then(response => {
-                        setRoomPlayers(response.data.other_players)
+                        setRoomPlayers(response.data.other_players);
                     })
                     .catch(error => {
                         console.error(error);
                     });
-
             })
             .catch(error => {
                 console.error(error);
@@ -153,35 +158,38 @@ const Game = props => {
     useEffect(() => {
         if (!focus) {
             if (wPress === true && worldArray[player.x][player.y].north) {
-                HandleMove(0, -1)
-                    ;
+                HandleMove(0, -1);
             } else if (aPress === true && worldArray[player.x][player.y].west) {
-                HandleMove(-1, 0)
-                    ;
-            } else if (sPress === true && worldArray[player.x][player.y].south) {
-                HandleMove(0, 1)
-                    ;
+                HandleMove(-1, 0);
+            } else if (
+                sPress === true &&
+                worldArray[player.x][player.y].south
+            ) {
+                HandleMove(0, 1);
             } else if (dPress === true && worldArray[player.x][player.y].east) {
-                HandleMove(1, 0)
-                    ;
+                HandleMove(1, 0);
             }
         }
     }, [wPress, aPress, sPress, dPress]);
 
     const HandleMove = (dx, dy) => {
-        let newRoomCoords = { x: player.x + dx, y: player.y + dy }
+        let newRoomCoords = { x: player.x + dx, y: player.y + dy };
         setPlayer({
             ...player,
             x: player.x + dx,
-            y: player.y + dy
-        })
+            y: player.y + dy,
+        });
         //find the room ID of the room we are moving to.
-        let newId = worldArray[newRoomCoords.x][newRoomCoords.y].id
+        let newId = worldArray[newRoomCoords.x][newRoomCoords.y].id;
 
-        const headthing = `Token ${localStorage.getItem('token')}`;
+        const headthing = `Token ${localStorage.getItem("token")}`;
 
         axios
-            .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': newId }, { headers: { authorization: headthing } })
+            .post(
+                "https://gnarly-funky.herokuapp.com/api/adv/move/",
+                { room_id: newId },
+                { headers: { authorization: headthing } }
+            )
             .then(response => {
                 if (response.data.other_players) {
                     setRoomPlayers(response.data.other_players);
@@ -190,19 +198,19 @@ const Game = props => {
             .catch(error => {
                 console.error(error);
             });
-    }
+    };
 
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
-    }
+    };
 
     const handleClose = () => {
         setOpen(false);
-    }
+    };
 
-    const paperClasses = makeStyles((theme) => ({
+    const paperClasses = makeStyles(theme => ({
         paper: {
             width: "100%",
             margin: "0",
@@ -210,21 +218,24 @@ const Game = props => {
             "& .dialog-title": {
                 margin: "1rem",
                 fontSize: "5rem",
-                color: "#c4c4c4"
+                color: "#c4c4c4",
             },
             "& .dialog-controls": {
                 margin: "1rem",
                 fontSize: "4rem",
-                color: "#c4c4c4"
-            }
-        }
-    }))()
+                color: "#c4c4c4",
+            },
+        },
+    }))();
+
 
     return (
         <div className={classes.root}>
             <div className={classes.menu}>
                 <div className={classes.menuTabContainer}>
-                    <div className={classes.menuTab} onClick={handleOpen}>Controls</div>
+                    <div className={classes.menuTab} onClick={handleOpen}>
+                        Controls
+                    </div>
                     <div className={classes.menuTab} onClick={logout}>
                         <Signout />
                     </div>
@@ -233,7 +244,10 @@ const Game = props => {
             <div className={classes.main}>
                 {worldArray ? (
                     <div className={classes.window}>
-                        <WorldMap worldArray={worldArray} player={player} />
+                        <WorldMap
+                            worldArray={worldArray}
+                            player={player}
+                        />
                         <div className={classes.mainBottom}>
                             <div className={classes.descWindow}>
                                 <div className={classes.descTitle}>
@@ -250,18 +264,18 @@ const Game = props => {
                         </div>
                     </div>
                 ) : (
-                        <div className={classes.window}>
-                            <p>LOADING...</p>
-                        </div>
-                    )}
+                    <div className={classes.window}>
+                        <p>LOADING...</p>
+                    </div>
+                )}
 
                 <div className={classes.sidebar}>
                     <div className={classes.top}>
                         {worldArray ? (
                             <Minimap worldArray={worldArray} player={player} />
                         ) : (
-                                <p>LOADING...</p>
-                            )}
+                            <p>LOADING...</p>
+                        )}
                     </div>
                     <div className={classes.bottom}>
                         <div className={classes.tabs}>
@@ -286,13 +300,25 @@ const Game = props => {
                                 Players
                             </div>
                         </div>
-                        {currentTab === "chat" ? <Chat setFocus={setFocus} serverPlayer={serverPlayer}/> : <div>
-                                    {roomPlayers.map(player => {
-                                        return(
-                                        <div key={player.username} className={classes.playerlist}>{player.username}</div>
-                                    )
-                                    })}
-                                </div>}
+                        {currentTab === "chat" ? (
+                            <Chat
+                                setFocus={setFocus}
+                                serverPlayer={serverPlayer}
+                            />
+                        ) : (
+                            <div>
+                                {roomPlayers.map(player => {
+                                    return (
+                                        <div
+                                            key={player.username}
+                                            className={classes.playerlist}
+                                        >
+                                            {player.username}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -302,15 +328,11 @@ const Game = props => {
                 are-labelledby="remove-profile-dialog"
                 classes={paperClasses}
             >
-                <div className='dialog-title'>
-                    Controls
-                </div>
+                <div className="dialog-title">Controls</div>
                 <DialogContent>
                     <img src={Controlspng} />
                 </DialogContent>
-                <div className='dialog-controls'>
-                    WASD = Move
-                </div>
+                <div className="dialog-controls">WASD = Move</div>
             </Dialog>
         </div>
     );

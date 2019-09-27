@@ -91,6 +91,7 @@ const gameStyles = makeStyles(theme => ({
         display: "flex",
         width: "100%",
         height: "20%",
+        overflowY: "auto",
     },
     descWindow: {
         display: "flex",
@@ -99,7 +100,6 @@ const gameStyles = makeStyles(theme => ({
         flexDirection: "column",
         marginLeft: "2%",
         marginTop: "1%",
-        overflowY: "auto",
         maxHeight: "100%",
     },
     descTitle: {
