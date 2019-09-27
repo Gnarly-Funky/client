@@ -239,8 +239,15 @@ const Game = props => {
                                         : ""}
                                 </div>
                             </div>
-                            <div className={classes.playerlist}>
-                                <p>Playerlist</p>
+                            <div >
+                                <div className={classes.playerlistTitle}>Playerlist</div>
+                                <div>
+                                    {serverPlayer.other_players.map(player => {
+                                        return(
+                                        <div className={classes.playerlist}>{player.username}</div>
+                                    )
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>
