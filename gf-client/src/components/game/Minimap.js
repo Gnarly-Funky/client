@@ -57,13 +57,13 @@ const Minimap = ({ columns = 20, player, worldArray }) => {
 
     return (
         <div className={classes.minimap}>
-            {displayArr.map(tile => {
+            {displayArr.map((tile, i) => {
                 if (tile === "P") {
-                    return <div className={classes.room + " player"} />;
+                    return <div key={i} className={classes.room + " player"} />;
                 } else if (tile !== "null") {
-                    return <div className={classes.room} />;
+                    return <div key={i} className={classes.room} />;
                 } else {
-                    return <div className={classes.room + " empty"} />;
+                    return <div key={i} className={classes.room + " empty"} />;
                 }
             })}
         </div>

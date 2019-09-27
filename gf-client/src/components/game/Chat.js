@@ -38,7 +38,6 @@ const Chat = props => {
         });
 
         if (chatRef) {
-            console.dir(chatRef);
             chatRef.current.scrollIntoView()
         }
     }, [messages]);

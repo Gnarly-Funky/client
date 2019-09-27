@@ -119,6 +119,9 @@ const Game = props => {
                 axios
                     .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': myId }, { headers: { authorization: headthing } })
                     .then(response => {
+                        // const otherPlayers = response.data.other_players.filter(p => )
+                        console.log(response.data.other_players)
+
                         setRoomPlayers(response.data.other_players)
                         console.log(`other players in my room: ${ response.data.other_players }`)
                     })
@@ -254,7 +257,7 @@ const Game = props => {
                                 <div>
                                     {roomPlayers.map(player => {
                                         return(
-                                        <div className={classes.playerlist}>{player.username}</div>
+                                        <div key={player.username} className={classes.playerlist}>{player.username}</div>
                                     )
                                     })}
                                 </div>
