@@ -96,15 +96,13 @@ const Game = props => {
                     }
                 }
                 let world = response.data.world;
-                console.dir(response.data.world);
-                console.log(JSON.stringify(response.data.world));
                 for (let i = 0; i < world.length; i++) {
                     pulled_worlds[world[i].x][world[i].y] = world[i];
                 }
                 setWorldArray([...pulled_worlds]);
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }, []);
 
@@ -113,12 +111,11 @@ const Game = props => {
         axios
             .get('https://gnarly-funky.herokuapp.com/api/adv/init/', { headers: { authorization: headthing } })
             .then(response => {
-                console.log(response.data)
                 setServerPlayer(response.data)
                 setPlayer({ x: response.data.room_x, y: response.data.room_y })
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }, []);
 
@@ -143,7 +140,6 @@ const Game = props => {
     };
 
     useEffect(() => {
-        // console.log(wPress);
         if (!focus) {
             if (wPress === true && worldArray[player.x][player.y].north) {
                 HandleMove(0, -1)
@@ -170,17 +166,16 @@ const Game = props => {
         })
         //find the room ID of the room we are moving to.
         let newId = worldArray[newRoomCoords.x][newRoomCoords.y].id
-        console.log(newId)
 
         const headthing = `Token ${localStorage.getItem('token')}`;
 
         axios
             .post('https://gnarly-funky.herokuapp.com/api/adv/move/', { 'room_id': newId }, { headers: { authorization: headthing } })
             .then(response => {
-                console.log(response.data)
+                // Finish
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }
 
